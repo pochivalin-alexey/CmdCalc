@@ -1,0 +1,2 @@
+# CmdCalc
+Calculate in cmd
