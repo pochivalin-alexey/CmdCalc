@@ -1,10 +1,14 @@
 package ru.pochivalin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Calculator {
 
     private double result;
     private static int minIndexOper = 1;
     private static int maxIndexOper = 4;
+    private static final Logger LOG = LoggerFactory.getLogger(Calculator.class);
 
     public void add(final int firstArg, final int secondArg) {
             this.result = firstArg + secondArg;
@@ -14,7 +18,7 @@ public class Calculator {
         if (secondArg != 0) {
             this.result = firstArg / (double) secondArg;
         } else {
-            System.out.println("Sorry, can't divide by zero");
+            LOG.info("Sorry, can't divide by zero");
         }
     }
 
@@ -29,7 +33,7 @@ public class Calculator {
     public boolean validateOperation(final int indexOperation) {
         boolean isValide = true;
         if (!(indexOperation >= minIndexOper && indexOperation <= maxIndexOper)) {
-            System.out.println("Sorry, don't have this operation.");
+            LOG.info("Sorry, don't have this operation.");
             isValide = false;
         }
         return isValide;
@@ -41,8 +45,7 @@ public class Calculator {
             int num = Integer.parseInt(number);
             isValide = true;
         } catch (NumberFormatException e) {
-            //e.printStackTrace();
-            System.out.println("use incorect value, try again");
+            LOG.info("use incorect value, try again");
         }
         return isValide;
     }

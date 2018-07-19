@@ -16,6 +16,12 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.13</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -87,6 +93,7 @@
                     <rulesets>
                         <ruleset>/rulesets/java/braces.xml</ruleset>
                         <ruleset>/rulesets/java/naming.xml</ruleset>
+                        <ruleset>/rulesets/java/basic.xml</ruleset>
                     </rulesets>
                 </configuration>
             </plugin>
@@ -97,7 +104,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.pochivalin.InteractRunner</mainClass>
+                            <mainClass>ru.pochivalin.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

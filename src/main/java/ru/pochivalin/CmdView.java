@@ -1,35 +1,40 @@
 package ru.pochivalin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class InteractRunner {
-	public static void main(String[] args) {
+public class CmdView {
+
+	public static final Logger LOG = LoggerFactory.getLogger(CmdView.class);
+
+	public void start(Calculator calc) {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"))) {
-			Calculator calc = new Calculator();
 			String exit = "no";
 			while (!exit.equals("yes")) {
-				System.out.print("Enter number of operation: "
-						+ "1:\"+\" 2:\"-\" 3:\"/\" 4:\"*\" : ");
+				LOG.info("Enter number of operation: "
+					+ "1:\"+\" 2:\"-\" 3:\"/\" 4:\"*\" : ");
 				String operation = reader.readLine();
 				if (!operation.isEmpty()) {
 					boolean isValideOperation = calc.validateOperation(Integer.parseInt(operation));
 					if (isValideOperation) {
-						System.out.print("Enter first arg : ");
+						LOG.info("Enter first arg : ");
 						String first = reader.readLine();
 						boolean firstIsValide = calc.validateArgs(first);
 						if (firstIsValide) {
-							System.out.print("Enter second arg : ");
+							LOG.info("Enter second arg : ");
 							String second = reader.readLine();
 							boolean secondIsValide = calc.validateArgs(second);
 							if (secondIsValide) {
 								calc.calc(Integer.parseInt(operation),
 										Integer.parseInt(first),
 										Integer.parseInt(second));
-								System.out.println("Result : " + calc.getResult());
+								LOG.info("Result : " + calc.getResult());
 								calc.cleanResult();
-								System.out.println("Exit : yes/no ");
+								LOG.info("Exit : yes/no ");
 								exit = reader.readLine();
 							}
 						}
@@ -37,9 +42,9 @@ public class InteractRunner {
 				}
 			}
 		} catch (NullPointerException e) {
-			e.printStackTrace();
+			LOG.info(e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.info(e.getMessage());
 		}
 	}
 }
